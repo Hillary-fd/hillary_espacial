@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Desarrollo Web Espacial - CTP de Aserrí</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <canvas id="starfield"></canvas>
+
+  <header>
+    <img src="logo.png" alt="Logo CTP de Aserrí" class="logo">
+    <h1>¡Explora el universo del Desarrollo Web!</h1>
+    <p class="subtitulo">Feria de Especialidades Técnicas 2025</p>
+
+    <button id="btnInfoTecnica">🔍 Ver diseño técnico</button>
+    <button onclick="mostrarDisenoUI()">🧩 ¿Cómo fue diseñada esta interfaz?</button>
+  </header>
+
+  <main>
+      <section class="galaxia">
+    <h2>¿Qué aprenderás en nuestra especialidad?</h2>
+    <div class="contenedor-cards">
+      <div class="card card-html tooltip">
+        <h3>HTML5</h3>
+        <p>Construye la estructura de páginas web.</p>
+        <span class="tooltip-text">Componente estructural: HTML define la estructura de la interfaz.</span>
+      </div>
+      <div class="card card-css tooltip">
+        <h3>CSS3</h3>
+        <p>Estiliza con efectos visuales sorprendentes.</p>
+        <span class="tooltip-text">Componente visual: CSS estiliza la presentación de los elementos.</span>
+      </div>
+      <div class="card card-js tooltip">
+        <h3>JavaScript</h3>
+        <p>Agrega interacción y dinamismo galáctico.</p>
+        <span class="tooltip-text">Componente lógico y de comportamiento: permite la interacción con el usuario.</span>
+      </div>
+      <div class="card card-responsive tooltip">
+        <h3>Diseño Responsivo</h3>
+        <p>Adapta tus sitios a cualquier planeta... o dispositivo.</p>
+        <span class="tooltip-text">Permite que el diseño se vea bien en cualquier resolución.</span>
+      </div>
+    </div>
+  </section>
+
+    <!-- MODAL Diseño Técnico -->
+    <div id="modalInfo" class="modal">
+      <div class="modal-contenido">
+        <span class="cerrar">&times;</span>
+        <h2>Diseño Técnico del Sitio</h2>
+        <ul>
+          <li><strong>Estructura (HTML):</strong> secciones, tarjetas, header, footer.</li>
+          <li><strong>Estilo (CSS):</strong> colores, animaciones, responsividad.</li>
+          <li><strong>Interacción (JS):</strong> juego, efectos, movimiento de estrellas.</li>
+          <li><strong>Multimedia:</strong> sonido de fondo, imágenes, QR.</li>
+          <li><strong>Componentes reutilizables:</strong> tarjetas de planetas, controles del juego.</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- MODAL Diseño UI -->
+    <div id="modalDisenoUI" class="modal">
+      <div class="modal-contenido">
+        <span class="cerrar" onclick="cerrarDisenoUI()">&times;</span>
+        <h3>🧠 Etapas del diseño de la interfaz</h3>
+        <ul>
+          <li><strong>1. Análisis del usuario:</strong> ¿Quién lo va a usar?</li>
+          <li><strong>2. Modelado de tareas:</strong> Qué acciones realizará.</li>
+          <li><strong>3. Estructura visual:</strong> Layout de secciones (bienvenida → juego → proyectos).</li>
+          <li><strong>4. Prototipado:</strong> Bocetos previos antes del código.</li>
+          <li><strong>5. Implementación:</strong> Uso de HTML, CSS, JS.</li>
+          <li><strong>6. Pruebas de usabilidad:</strong> Claridad, accesibilidad, estética.</li>
+        </ul>
+        <h4>🌌 Flujo de navegación:</h4>
+        <ol>
+          <li>Bienvenida</li>
+          <li>Exploración de tecnologías</li>
+          <li>Minijuegos</li>
+          <li>Zona de proyectos</li>
+        </ol>
+      </div>
+    </div>
+
+
+    <!--Apartado de los juegos-->
+    <section class="game-section">
+      <h2>🎮 Recolecta los Códigos Perdidos y Atrapa las Estrellas del Conocimiento</h2>
+      <p>Mueve tu nave y atrapa solo los fragmentos correctos de código web, mientras atrapas las estrellas del conocimiento.</p>
+
+      <div class="controls">
+        <button id="startCodeGame" title="Interfaz de usuario: inicia el juego.">Iniciar Juego de Códigos</button>
+        <button id="stopCodeGame" title="Detiene el juego actual.">Detener Juego de Códigos</button>
+        <button id="exitCodeGame" title="Finaliza el juego.">Salir Juego de Códigos</button>
+        <button id="startStarGame" title="Inicia el minijuego de estrellas.">Iniciar MiniJuego de Estrellas</button>
+        <button id="stopStarGame" title="Detiene el minijuego.">Detener MiniJuego de Estrellas</button>
+        <button id="exitStarGame" title="Finaliza el minijuego.">Salir MiniJuego de Estrellas</button>
+      </div>
+
+      <canvas id="gameCanvas" width="400" height="400"></canvas>
+      <audio id="collectSound" src="https://www.soundjay.com/button/sounds/button-16.mp3"></audio>
+
+      <div class="juego-area" id="juegoArea">
+        <div class="estrella" id="estrella"></div>
+      </div>
+      <p id="puntuacion">Puntos: 0</p>
+    </section>
+
+
+    <!--Apartado de las tarjetas de subareas-->
+      <section class="subareas">
+    <h2>Subáreas del mundo de desarrollo web</h2>
+    <div class="contenedor-subareas">
+      <div class="card-subarea tooltip">
+        <h3>Programación</h3>
+        <p>¡Eres el piloto que programa la ruta de tu nave! Usas códigos para construir y dar vida a mundos digitales mientras exploras galaxias de tecnología. 👩‍🚀💻✨</p>
+      </div>
+      <div class="card-subarea tooltip">
+        <h3>Diseño de Software</h3>
+        <p>¡Es como construir la nave espacial de tus sueños! Planeas y dibujas cómo funcionará todo para que el sistema sea súper confiable, seguro y listo para despegar sin problemas. 🚀✨</p>
+      </div>
+      <div class="card-subarea tooltip">
+        <h3>Soporte</h3>
+        <p>Eres quien mantiene las computadoras y redes en funcionamiento, las armas, configuras y proteges para que todo vuele sin problemas. ¡Tu misión es que la tecnología nunca se quede en tierra! ⚙️🚀</p>
+      </div>
+      <div class="card-subarea tooltip">
+        <h3>Tecnologías de la inforamción</h3>
+        <p>Usa herramientas digitales para crear, analizar y proteger datos. Aprende a manejar tecnología para el día a día y mantener todo seguro. 🌐💻🔐</p>
+      </div>
+      <div class="card-subarea tooltip">
+        <h3>Emprendimiento</h3>
+        <p>Aprende a crear y lanzar negocios innovadores con tecnología. Planifica, negocia y construye tu empresa para dejar huella. ¡Haz que tu idea despegue! 🚀💡</p>
+      </div>
+      <div class="card-subarea tooltip">
+        <h3>Inglés Técnico</h3>
+        <p>Es entender y usar palabras tech para comunicarte fácil en tecnología y computación. Ideal para leer y hablar sobre temas digitales. 🚀✨</p>
+      </div>
+    </div>
+  </section>
+
+
+  <!--Apartado de la galeria-->
+    <section class="galeria">
+      <h2>🚀 Proyectos Espaciales</h2>
+      <div class="contenedor-proyectos">
+        <div class="proyecto proy1" title="Tarjeta de proyecto con imagen y título.">
+          <h3>Landing de una página de cine</h3>
+        </div>
+        <div class="proyecto proy2" title="Tarjeta de proyecto visual.">
+          <h3>Blog del mes patrio</h3>
+        </div>
+        <div class="proyecto proy3" title="Tarjeta visual con imagen ilustrativa.">
+          <h3>Tarjeta de presentación</h3>
+        </div>
+      </div>
+      <p>Escanea el código para más información:</p>
+      <img src="qr_ctpaserri.png" alt="QR de contacto" class="qr">
+    </section>
+  </main>
+
+  <footer title="Elemento persistente del layout.">
+    <p>CTP de Aserrí - Especialidad Desarrollo Web 🚀</p>
+  </footer>
+
+  <audio id="bgm" src="espacio.mp3" loop></audio>
+  <script src="script.js"></script>
+</body>
+</html>
